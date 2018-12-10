@@ -1,0 +1,23 @@
+# Cheers: https://github.com/github/gitignore/blob/48901518711de752155b2f6cf5627bcaf9caabd1/Unity.gitignore
+
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/Assets/AssetStoreTools*
+*.pidb.meta
+*.pdb.meta
+sysinfo.txt
+*.apk
+
+# Extra from Bilal:
+/Sizerr.userprefs
+/.vs
+/.vscode
+
+# To avoid issues when switching computers (not manually modified so far):
+/Sizerr.sln
+/*.csproj
+/Logs
+.gradle

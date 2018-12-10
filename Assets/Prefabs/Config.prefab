@@ -1,0 +1,448 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4419842731128895411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7143813155965283322}
+  - component: {fileID: 3582245873645597198}
+  m_Layer: 0
+  m_Name: Config
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7143813155965283322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419842731128895411}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3582245873645597198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419842731128895411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029f2921d41ec43979cdf3fd6ff12b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _adFirstAfter: 120
+  _adMinTimeBetween: 240
+  _adDelay: 1.5
+  _adCheckPeriod: 0.1
+  _adGiveUpAfter: 5
+  _audioMasterVolumeOn: -15
+  _audioVolumeOff: -80
+  _availableBombPrefab: {fileID: 7072556381645470527, guid: 6949c3008c49b4778889c389254c28e8,
+    type: 3}
+  _availableBombLimit: 6
+  _availableBombInitialCooldown: 5
+  _availableBombGrowShrinkTime: 0.5
+  _dropExtraBombPowerChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.03
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropExtraLifeChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 2
+      value: 0
+      inSlope: 0.0013061599
+      outSlope: 0.0013061599
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15649094
+    - serializedVersion: 3
+      time: 20
+      value: 0.01
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropExtraSpeedChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.03
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropExtraTimeChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.03
+      inSlope: 0.00074483023
+      outSlope: 0.00074483023
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15072463
+    - serializedVersion: 3
+      time: 100
+      value: 0.06
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropMultibombChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.03
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropGoldChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 30
+      value: 0.45
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 70
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropEmeraldChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 20
+      value: 0.15
+      inSlope: 0.0075000003
+      outSlope: 0.003
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 70
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 110
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropDiamondChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 50
+      value: 0.15
+      inSlope: 0.004090909
+      outSlope: 0.004090909
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 110
+      value: 0.45
+      inSlope: 0.0024285715
+      outSlope: 0.0024285715
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 400
+      value: 1
+      inSlope: 0.0018965518
+      outSlope: 0.0020632697
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.17196213
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropMineChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _explosionLifetime: 0.7
+  _explosionEndBurnAt: 0.7
+  _explosionSafeDistance: 0.3
+  _explosionCombustAfter: 0.1
+  _floorPiecePrefab: {fileID: 8666668863997414229, guid: 2a918e2663e1340b4b63b6be1c5ca07e,
+    type: 3}
+  _floorUnitSize: {x: 32, y: 32}
+  _floorNumCopies: {x: 3, y: 3}
+  _gameTargetFrameRate: 60
+  _gameplayUIAnimTime: 1.5
+  _mainCameraZoomTime: 3
+  _mineExplodeAfter: 4
+  _mineCombustAt: 0.975
+  _mineDestroyAfter: 0.25
+  _minePlacedDurationMultiplier: 2
+  _mineExplosionPrefab: {fileID: 7412922891362607423, guid: 2417d67c0511c4f43a4bc383d222689e,
+    type: 3}
+  _mineExplosionReach: 2
+  _objectLootedParticle: {fileID: 2850170054097354705, guid: e898d117768f0490eb1d92f8adb8f316,
+    type: 3}
+  _objectLootedShrinkTime: 0.25
+  _placeExtraBombPowerChance:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _placeExtraLifeChance:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _placeExtraSpeedChance:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _placeExtraTimeChance:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _placeMultibombChance:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _placeIndestructibleRockChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 200
+      value: 0.15
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _placeRockChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.65
+      inSlope: -0.6
+      outSlope: -0.6
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _placeMineChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 10
+      value: 0
+      inSlope: 0.000121203484
+      outSlope: 0.000121203484
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15362318
+    - serializedVersion: 3
+      time: 200
+      value: 0.05
+      inSlope: 0.000009732892
+      outSlope: 0.000009732892
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2550724
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _playerMoveTime: 0.3
+  _playerMaxRotationPerSecond: 480
+  _playerAshPrefab: {fileID: 1012816045702770045, guid: 36c589c7d1c2341c7b440586ef235b81,
+    type: 3}
+  _playerBurnTime: 0.6
+  _playerBombExplodeAfter: 2
+  _playerBombCombustAt: 0.975
+  _playerBombDestroyAfter: 0.25
+  _playerExplosionPrefab: {fileID: 5506311327938120727, guid: 12f448a8a998842a88c443990650e78d,
+    type: 3}
+  _playerExplosionFanOutTime: 0.15
+  _playerExplosionPierceRatio: 0.2
+  _powerupLifetime: 6
+  _powerupBombPowerLimit: 10
+  _powerupExtraLifeSaveDuration: 1
+  _powerupExtraLifeCooldown: 40
+  _powerupExtraSpeedLimit: 5
+  _powerupExtraSpeedDifference: 0.025
+  _powerupExtraTimeAmount: 20
+  _powerupExtraTimeCooldown: 5
+  _powerupMultibombLimit: 6
+  _powerupMultibombDifference: 0.6
+  _scoreFromGold: 1
+  _scoreFromEmerald: 4
+  _scoreFromDiamond: 7
+  _tileExtraBombPowerPrefab: {fileID: 4612681789032088084, guid: 73ed90b7a3e6244e4af99e1f2fc21da8,
+    type: 3}
+  _tileExtraLifePrefab: {fileID: 7162301374402953314, guid: 11c2cb1093bc44375afc944604d11f66,
+    type: 3}
+  _tileExtraSpeedPrefab: {fileID: 2357691349752004710, guid: f81e55dd63cbd493f98c6501ecf96b9a,
+    type: 3}
+  _tileExtraTimePrefab: {fileID: 7994087324650429, guid: b829be47bec5f45cfb26564a41b3b91f,
+    type: 3}
+  _tileMultibombPrefab: {fileID: 6945556443809891831, guid: 06b61ce4adec749acab30763c3c312b8,
+    type: 3}
+  _tileDiamondPrefab: {fileID: 6456432330771414850, guid: 4b39523838ee64d6b8dd8d0ab6f542d2,
+    type: 3}
+  _tileEmeraldPrefab: {fileID: 4842274068765088106, guid: ce221ead51db145dabb90c057e01dd75,
+    type: 3}
+  _tileGoldPrefab: {fileID: 2395834394148837651, guid: 31f63edc597bc462cbcad5523cf31942,
+    type: 3}
+  _tileMinePrefab: {fileID: 3295887556113005127, guid: d436fa583e14b4e32a0d06bf86430157,
+    type: 3}
+  _tileIndestructibleRockPrefab: {fileID: 4706577151508500245, guid: 34d4c224b25f54c5c94259ff4bc6095f,
+    type: 3}
+  _tilePlayerBombPrefab: {fileID: 169612009113498765, guid: 43998fd81bf6f4c69b87e4e1c1cbda7c,
+    type: 3}
+  _tileRockPrefab: {fileID: 4152904006430372770, guid: 69ddb3f1ad2c4417181579760fab1e9c,
+    type: 3}
+  _tilesSpawnDistanceX: 14
+  _tilesSpawnDistanceY: 10
+  _timerStartingTime: 93
