@@ -8,7 +8,7 @@ public class Gold : LootableObject, IDropableTile
     
     protected override void OnLooted()
     {
-        Score.Amount += S.ScoreFromGold;
-        Sounds.Gold.Play();
+        Score.Add(S.ScoreFromGold);
+        Sounds.Points1.Play();
     }
 }

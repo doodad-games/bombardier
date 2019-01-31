@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExtraLife : LootableObject, IDropableTile, IPlaceableTile, IActionedTile
+public class ExtraLife : LootableObject, IDropableTile, IActionedTile
 {
     static float _nextAvailableAfter;
 
@@ -8,10 +8,6 @@ public class ExtraLife : LootableObject, IDropableTile, IPlaceableTile, IActione
         Time.time > _nextAvailableAfter &&
         UnityEngine.Random.value <
             S.DropExtraLifeChance.Evaluate(-pos.y);
-            
-    public bool RollForPlacement(Vector2Int pos) =>
-        UnityEngine.Random.value <
-            S.PlaceExtraLifeChance.Evaluate(-pos.y);
 
     public void PlacedOrDropped(Vector2Int pos, bool isDropped)
     {

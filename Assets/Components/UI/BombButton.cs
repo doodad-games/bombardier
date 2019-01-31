@@ -4,12 +4,7 @@ using UnityEngine.EventSystems;
 
 public class BombButton : MonoBehaviour, IPointerDownHandler
 {
-    static Action _placed;
-
-    public static void SubPlaced(Action cb) =>
-        _placed += cb;
-    public static void UnsubPlaced(Action cb) =>
-        _placed -= cb;
+    public static event Action onBomb;
 
     public void OnPointerDown(PointerEventData eventData) =>
         TryPlaceBomb();
@@ -21,7 +16,7 @@ public class BombButton : MonoBehaviour, IPointerDownHandler
 
     void TryPlaceBomb()
     {
-        if (Player.GameOver) { return; }
+        if (Player.GameOver != null || GameplayUI.MenuShowing) { return; }
 
         if (!BombCooldown.BombAvailable)
         {
@@ -36,8 +31,8 @@ public class BombButton : MonoBehaviour, IPointerDownHandler
             as PlayerBomb;
         bomb.Initialise(Player.BombPower);
 
-        _placed?.Invoke();
-
+        onBomb?.Invoke();
         Sounds.PlaceBomb.Play();
+        ++Stats.BombsPlaced;
     }
 }

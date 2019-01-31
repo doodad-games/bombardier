@@ -6,12 +6,10 @@ public class MusicButton : MonoBehaviour, IPointerClickHandler
 {
     static MusicButton _instance;
     static bool _musicOff;
-    static Action<bool> _musicChanged;
 
     static MusicButton() =>
-        SoundButton.SubSound((on) =>
-            _instance?._animator.SetBool("SoundOn", on)
-        );
+        SoundButton.onSoundChanged += (on) =>
+            _instance?._animator.SetBool("SoundOn", on);
 
     public static bool MusicOn
     {
@@ -21,17 +19,11 @@ public class MusicButton : MonoBehaviour, IPointerClickHandler
             _musicOff = !value;
             PlayerPrefs.SetInt("MusicOff", value ? 0 : 1);
             
-            _musicChanged?.Invoke(value);
             _instance._animator.SetBool("MusicOn", value);
 
             Sounds.BGMVolume(value);
         }
     }
-
-    public static void SubMusic(Action<bool> cb) =>
-        _musicChanged += cb;
-    public static void UnsubMusic(Action<bool> cb) =>
-        _musicChanged -= cb;
 
     Animator _animator;
 
@@ -49,6 +41,8 @@ public class MusicButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!SoundButton.SoundOn) return;
+
         MusicOn = !MusicOn;
         Sounds.Click.Play();
     }

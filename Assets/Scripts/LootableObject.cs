@@ -3,6 +3,11 @@ using UnityEngine;
 
 public abstract class LootableObject : CustomTile
 {
+    #pragma warning disable CS0649
+    [SerializeField]
+    Lootable _type;
+    #pragma warning restore CS0649
+
     protected abstract void OnLooted();
 
     bool _consumed;
@@ -34,8 +39,17 @@ public abstract class LootableObject : CustomTile
 
         CleanUp();
 
+        ++Stats.LootCollected;
+        Stats.IncLootableCount(_type);
+
         yield return new WaitForSeconds(S.ObjectLootedShrinkTime);
 
         Destroy(gameObject);
+    }
+
+    public override void Combust()
+    {
+        ++Stats.LootDestroyed;
+        base.Combust();
     }
 }

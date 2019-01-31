@@ -39,8 +39,6 @@ public class PlayerExplosion : Explosion
     {
         if (_initialised) { throw new NotSupportedException(); }
 
-        base.Initialise(false);
-
         _power = power;
 
         _initialised = true;
@@ -66,7 +64,7 @@ public class PlayerExplosion : Explosion
         _minY = _intPos.y - 1;
         _maxY = _intPos.y + 1;
 
-        var pierces = Mathf.FloorToInt(_power * S.PlayerExplosionPierceRatio);
+        var pierces = _power >= S.PowerupBombPowerLimit ? 1 : 0;
 
         _extents = new Vector2Int[] { _up , _right , _down , _left }
             .Select(_ => ProcessTile(

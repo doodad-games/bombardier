@@ -9,12 +9,12 @@ public class BombCooldown : MonoBehaviour
 
     static BombCooldown()
     {
-        BombButton.SubPlaced(() => _instance.BombPlaced());
-        Player.SubMultibomb((m) =>
+        BombButton.onBomb += () => _instance.BombPlaced();
+
+        Player.onMultibombChanged += (m) =>
             _instance._Cooldown = 
                 S.AvailableBombInitialCooldown -
-                m * S.PowerupMultibombDifference
-        );
+                m * S.PowerupMultibombDifference;
     }
 
     int _BombsAvailable

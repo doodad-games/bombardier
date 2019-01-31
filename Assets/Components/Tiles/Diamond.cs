@@ -8,7 +8,7 @@ public class Diamond : LootableObject, IDropableTile
     
     protected override void OnLooted()
     {
-        Score.Amount += S.ScoreFromDiamond;
-        Sounds.Diamond.Play();
+        Score.Add(S.ScoreFromDiamond);
+        Sounds.Points3.Play();
     }
 }

@@ -4,13 +4,18 @@ public class MainCamera : MonoBehaviour
 {
     static MainCamera _instance;
 
-    static MainCamera() =>
-        Player.SubGameOver(
-            (c) =>
-                _instance
-                    ._animator
-                    .SetTrigger("ZoomIn")
-        );
+    static MainCamera()
+    {
+        Player.onGameOver += (c) =>
+            _instance
+                ._animator
+                .SetTrigger("ZoomIn");
+
+        GameplayUI.onMenuHidden += () =>
+            _instance
+                ._animator
+                .SetTrigger("ZoomOut");
+    }
     
     Animator _animator;
 
@@ -21,6 +26,10 @@ public class MainCamera : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    void Start() =>
+    void Start()
+    {
         _animator.SetFloat("PlaybackSpeed", 1 / S.MainCameraZoomTime);
+
+        if (!GameplayUI.MenuShowing) _animator.SetTrigger("ZoomOut");
+    }
 }

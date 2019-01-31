@@ -4,9 +4,10 @@ using UnityEngine.EventSystems;
 
 public class SoundButton : MonoBehaviour, IPointerClickHandler
 {
+    public static event Action<bool> onSoundChanged;
+
     static SoundButton _instance;
     static bool _soundOff;
-    static Action<bool> _soundChanged;
 
     public static bool SoundOn
     {
@@ -16,17 +17,12 @@ public class SoundButton : MonoBehaviour, IPointerClickHandler
             _soundOff = !value;
             PlayerPrefs.SetInt("SoundOff", value ? 0 : 1);
             
-            _soundChanged?.Invoke(value);
+            onSoundChanged?.Invoke(value);
             _instance._animator.SetBool("SoundOn", value);
 
             Sounds.MasterVolume(value);
         }
     }
-
-    public static void SubSound(Action<bool> cb) =>
-        _soundChanged += cb;
-    public static void UnsubSound(Action<bool> cb) =>
-        _soundChanged -= cb;
 
     Animator _animator;
 

@@ -7,7 +7,7 @@ public class TileController : MonoBehaviour
     static TileController _instance;
 
     static TileController() =>
-        Player.SubMove((a, b) => _instance.RenderForMovement(a, b));
+        Player.onMove += (pos) => _instance.RenderForMovement(pos);
 
     public static IReadOnlyDictionary<Vector2Int, ICustomTile> Tiles =>
         _instance._tiles;
@@ -27,17 +27,11 @@ public class TileController : MonoBehaviour
     {
         _tiles = new Dictionary<Vector2Int, ICustomTile>();
         _prioritisedTiles = new List<IPlaceableTile>
-        {   S.TileMine
-        ,   S.TileExtraBombPower
-        ,   S.TileExtraLife
-        ,   S.TileExtraSpeed
-        ,   S.TileExtraTime
-        ,   S.TileMultibomb
-        ,   S.TileIndestructibleRock
+        {   S.TileIndestructibleRock
         ,   S.TileRock
         };
 
-        _lastRenderedPos = Player.PreMovePos;
+        _lastRenderedPos = Player.Pos;
 
         var distX = S.TilesSpawnDistanceX;
         var distY = S.TilesSpawnDistanceY;
@@ -108,12 +102,9 @@ public class TileController : MonoBehaviour
         return retval;
     }
 
-    void RenderForMovement(Vector2Int from, Vector2Int to)
+    void RenderForMovement(Vector2Int to)
     {
-        if (from != _lastRenderedPos)
-        {
-            throw new System.NotSupportedException();
-        }
+        var from = _lastRenderedPos;
 
         var d = to - from;
         var positions = new HashSet<Vector2Int>();

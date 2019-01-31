@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 0}
   _tileData: {fileID: 0}
+  _type: 4
 --- !u!95 &4404570716900466023
 Animator:
   serializedVersion: 3

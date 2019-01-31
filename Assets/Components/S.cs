@@ -1,390 +1,326 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>A collection of statics providing a single point configuration.</summary>
 public class S : MonoBehaviour
 {
-    public static float AdFirstAfter =>
-        _instance._adFirstAfter;
-    public static float AdMinTimeBetween =>
-        _instance._adMinTimeBetween;
-    public static float AdDelay =>
-        _instance._adDelay;
-    public static float AdCheckPeriod =>
-        _instance._adCheckPeriod;
-    public static float AdGiveUpAfter =>
-        _instance._adGiveUpAfter;
+    public static IReadOnlyDictionary<Lootable, string>
+        LootableDescriptions { get; private set; }
 
+    static S _instance;
+
+
+    #pragma warning disable CS0649
     public static float AudioMasterVolumeOn =>
         _instance._audioMasterVolumeOn;
+    [SerializeField] float _audioMasterVolumeOn = -15f;
     public static float AudioVolumeOff =>
         _instance._audioVolumeOff;
+    [SerializeField] float _audioVolumeOff = -80f;
 
     public static GameObject AvailableBombPrefab =>
         _instance._availableBombPrefab;
+    [SerializeField] GameObject _availableBombPrefab;
     public static int AvailableBombLimit =>
         _instance._availableBombLimit;
+    [SerializeField] int _availableBombLimit = 6;
     public static float AvailableBombInitialCooldown =>
         _instance._availableBombInitialCooldown;
+    [SerializeField] float _availableBombInitialCooldown = 5f;
     public static float AvailableBombGrowShrinkTime =>
         _instance._availableBombGrowShrinkTime;
+    [SerializeField] float _availableBombGrowShrinkTime = 0.5f;
 
     public static AnimationCurve DropExtraBombPowerChance =>
         _instance._dropExtraBombPowerChance;
+    [SerializeField] AnimationCurve _dropExtraBombPowerChance;
     public static AnimationCurve DropExtraLifeChance =>
         _instance._dropExtraLifeChance;
+    [SerializeField] AnimationCurve _dropExtraLifeChance;
     public static AnimationCurve DropExtraSpeedChance =>
         _instance._dropExtraSpeedChance;
+    [SerializeField] AnimationCurve _dropExtraSpeedChance;
     public static AnimationCurve DropExtraTimeChance =>
         _instance._dropExtraTimeChance;
+    [SerializeField] AnimationCurve _dropExtraTimeChance;
     public static AnimationCurve DropMultibombChance =>
         _instance._dropMultibombChance;
-    public static AnimationCurve DropMineChance =>
-        _instance._dropMineChance;
+    [SerializeField] AnimationCurve _dropMultibombChance;
+    public static AnimationCurve DropBronzeChance =>
+        _instance._dropBronzeChance;
+    [SerializeField] AnimationCurve _dropBronzeChance;
+    public static AnimationCurve DropSilverChance =>
+        _instance._dropSilverChance;
+    [SerializeField] AnimationCurve _dropSilverChance;
     public static AnimationCurve DropGoldChance =>
         _instance._dropGoldChance;
+    [SerializeField] AnimationCurve _dropGoldChance;
+    public static AnimationCurve DropPlatinumChance =>
+        _instance._dropPlatinumChance;
+    [SerializeField] AnimationCurve _dropPlatinumChance;
+    public static AnimationCurve DropSapphireChance =>
+        _instance._dropSapphireChance;
+    [SerializeField] AnimationCurve _dropSapphireChance;
     public static AnimationCurve DropEmeraldChance =>
         _instance._dropEmeraldChance;
+    [SerializeField] AnimationCurve _dropEmeraldChance;
+    public static AnimationCurve DropRubyChance =>
+        _instance._dropRubyChance;
+    [SerializeField] AnimationCurve _dropRubyChance;
     public static AnimationCurve DropDiamondChance =>
         _instance._dropDiamondChance;
+    [SerializeField] AnimationCurve _dropDiamondChance;
+    public static AnimationCurve DropPinkDiamondChance =>
+        _instance._dropPinkDiamondChance;
+    [SerializeField] AnimationCurve _dropPinkDiamondChance;
 
     public static float ExplosionLifetime =>
         _instance._explosionLifetime;
+    [SerializeField] float _explosionLifetime = 0.7f;
     public static float ExplosionEndBurnAt =>
         _instance._explosionEndBurnAt;
+    [SerializeField] float _explosionEndBurnAt = 0.7f;
     public static float ExplosionSafeDistance =>
         _instance._explosionSafeDistance;
+    [SerializeField] float _explosionSafeDistance = 0.3f;
     public static float ExplosionCombustAfter =>
         _instance._explosionCombustAfter;
+    [SerializeField] float _explosionCombustAfter = 0.1f;
 
     public static GameObject FloorPiece =>
         _instance._floorPiecePrefab;
+    [SerializeField] GameObject _floorPiecePrefab;
     public static Vector2 FloorUnitSize =>
         _instance._floorUnitSize;
+    [SerializeField] Vector2 _floorUnitSize = new Vector2(32f, 32f);
     public static Vector2Int FloorNumCopies =>
         _instance._floorNumCopies;
+    [SerializeField] Vector2Int _floorNumCopies = new Vector2Int(3, 3);
 
     public static float GameplayUIAnimTime =>
         _instance._gameplayUIAnimTime;
+    [SerializeField] float _gameplayUIAnimTime = 1.5f;
 
     public static float MainCameraZoomTime =>
         _instance._mainCameraZoomTime;
-    
-    public static float MineExplodeAfter =>
-        _instance._mineExplodeAfter;
-    public static float MineCombustAt =>
-        _instance._mineCombustAt;
-    public static float MineDestroyAfter =>
-        _instance._mineDestroyAfter;
-    public static float MinePlaceDurationMultiplier =>
-        _instance._minePlacedDurationMultiplier;
-
-    public static GameObject MineExplosion =>
-        _instance._mineExplosionPrefab;
-    public static int MineExplosionReach =>
-        _instance._mineExplosionReach;
+    [SerializeField] float _mainCameraZoomTime = 3f;
     
     public static GameObject ObjectLootedParticle =>
         _instance._objectLootedParticle;
+    [SerializeField] GameObject _objectLootedParticle;
     public static float ObjectLootedShrinkTime =>
         _instance._objectLootedShrinkTime;
+    [SerializeField] float _objectLootedShrinkTime = 0.25f;
 
-    public static AnimationCurve PlaceExtraBombPowerChance =>
-        _instance._placeExtraBombPowerChance;
-    public static AnimationCurve PlaceExtraLifeChance =>
-        _instance._placeExtraLifeChance;
-    public static AnimationCurve PlaceExtraSpeedChance =>
-        _instance._placeExtraSpeedChance;
-    public static AnimationCurve PlaceExtraTimeChance =>
-        _instance._placeExtraTimeChance;
-    public static AnimationCurve PlaceMultibombChance =>
-        _instance._placeMultibombChance;
     public static AnimationCurve PlaceIndestructibleRockChance =>
         _instance._placeIndestructibleRockChance;
+    [SerializeField] AnimationCurve _placeIndestructibleRockChance;
     public static AnimationCurve PlaceRockChance =>
         _instance._placeRockChance;
-    public static AnimationCurve PlaceMineChance =>
-        _instance._placeMineChance;
+    [SerializeField] AnimationCurve _placeRockChance;
 
-    public static float PlayerMoveTime =>
-        _instance._playerMoveTime;
-    public static float PlayerMaxRotPerSecond =>
-        _instance._playerMaxRotationPerSecond;
     public static GameObject PlayerAsh =>
         _instance._playerAshPrefab;
+    [SerializeField] GameObject _playerAshPrefab;
     public static float PlayerBurnTime =>
         _instance._playerBurnTime;
+    [SerializeField] float _playerBurnTime = 0.6f;
 
     public static float PlayerBombExplodeAfter =>
         _instance._playerBombExplodeAfter;
+    [SerializeField] float _playerBombExplodeAfter = 2f;
     public static float PlayerBombCombustAt =>
         _instance._playerBombCombustAt;
+    [SerializeField] float _playerBombCombustAt = 0.975f;
     public static float PlayerBombDestroyAfter =>
         _instance._playerBombDestroyAfter;
+    [SerializeField] float _playerBombDestroyAfter = 0.25f;
     
     public static GameObject PlayerExplosion =>
         _instance._playerExplosionPrefab;
+    [SerializeField] GameObject _playerExplosionPrefab;
     public static float PlayerExplosionFanOutTime =>
         _instance._playerExplosionFanOutTime;
-    public static float PlayerExplosionPierceRatio =>
-        _instance._playerExplosionPierceRatio;
+    [SerializeField] float _playerExplosionFanOutTime = 0.15f;
 
-    public static float PowerupLifetime =>
-        _instance._powerupLifetime;
+    public static float PlayerMoveTime =>
+        _instance._playerMoveTime;
+    [SerializeField] float _playerMoveTime = 0.3f;
+    public static float PlayerMoveUpdatePosAt =>
+        _instance._playerMoveUpdatePosAt;
+    [SerializeField] float _playerMoveUpdatePosAt = 0.8f;
+    public static float PlayerMoveDontUndoAt =>
+        _instance._playerMoveDontUndoAt;
+    [SerializeField] float _playerMoveDontUndoAt = 0.35f;
+    public static float PlayerMoveMaxRotPerSecond =>
+        _instance._playerMoveMaxRotationPerSecond;
+    [SerializeField] float _playerMoveMaxRotationPerSecond = 540f;
+
     public static int PowerupBombPowerLimit =>
         _instance._powerupBombPowerLimit;
+    [SerializeField] int _powerupBombPowerLimit = 10;
     public static float PowerupExtraLifeSaveDuration =>
         _instance._powerupExtraLifeSaveDuration;
+    [SerializeField] float _powerupExtraLifeSaveDuration = 1f;
     public static float PowerupExtraLifeCooldown =>
         _instance._powerupExtraLifeCooldown;
+    [SerializeField] float _powerupExtraLifeCooldown = 40f;
     public static int PowerupExtraSpeedLimit =>
         _instance._powerupExtraSpeedLimit;
+    [SerializeField] int _powerupExtraSpeedLimit = 5;
     public static float PowerupExtraSpeedDifference =>
         _instance._powerupExtraSpeedDifference;
+    [SerializeField] float _powerupExtraSpeedDifference = 0.02f;
     public static float PowerupExtraTimeAmount =>
         _instance._powerupExtraTimeAmount;
+    [SerializeField] float _powerupExtraTimeAmount = 20f;
     public static float PowerupExtraTimeCooldown =>
         _instance._powerupExtraTimeCooldown;
+    [SerializeField] float _powerupExtraTimeCooldown = 5f;
     public static int PowerupMultibombLimit =>
         _instance._powerupMultibombLimit;
+    [SerializeField] int _powerupMultibombLimit = 6;
     public static float PowerupMultibombDifference =>
         _instance._powerupMultibombDifference;
+    [SerializeField] float _powerupMultibombDifference = 0.5f;
     
+    public static int ScoreFromBronze =>
+        _instance._scoreFromBronze;
+    [SerializeField] int _scoreFromBronze = 1;
+    public static int ScoreFromSilver =>
+        _instance._scoreFromSilver;
+    [SerializeField] int _scoreFromSilver = 2;
     public static int ScoreFromGold =>
         _instance._scoreFromGold;
+    [SerializeField] int _scoreFromGold = 4;
+    public static int ScoreFromPlatinum =>
+        _instance._scoreFromPlatinum;
+    [SerializeField] int _scoreFromPlatinum = 8;
+    public static int ScoreFromSapphire =>
+        _instance._scoreFromSapphire;
+    [SerializeField] int _scoreFromSapphire = 16;
     public static int ScoreFromEmerald =>
         _instance._scoreFromEmerald;
+    [SerializeField] int _scoreFromEmerald = 32;
+    public static int ScoreFromRuby =>
+        _instance._scoreFromRuby;
+    [SerializeField] int _scoreFromRuby = 64;
     public static int ScoreFromDiamond =>
         _instance._scoreFromDiamond;
+    [SerializeField] int _scoreFromDiamond = 128;
+    public static int ScoreFromPinkDiamond =>
+        _instance._scoreFromPinkDiamond;
+    [SerializeField] int _scoreFromPinkDiamond = 256;
+    
+    public static Sprite SpriteLootableUnknown =>
+        _instance._spriteLootableUnknown;
+    [SerializeField] Sprite _spriteLootableUnknown;
 
     public static ExtraBombPower TileExtraBombPower =>
         _instance._tileExtraBombPowerPrefab;
+    [SerializeField] ExtraBombPower _tileExtraBombPowerPrefab;
     public static ExtraLife TileExtraLife =>
         _instance._tileExtraLifePrefab;
+    [SerializeField] ExtraLife _tileExtraLifePrefab;
     public static ExtraSpeed TileExtraSpeed =>
         _instance._tileExtraSpeedPrefab;
+    [SerializeField] ExtraSpeed _tileExtraSpeedPrefab;
     public static ExtraTime TileExtraTime =>
         _instance._tileExtraTimePrefab;
+    [SerializeField] ExtraTime _tileExtraTimePrefab;
     public static Multibomb TileMultibomb =>
         _instance._tileMultibombPrefab;
+    [SerializeField] Multibomb _tileMultibombPrefab;
+    public static Bronze TileBronze =>
+        _instance._tileBronzePrefab;
+    [SerializeField] Bronze _tileBronzePrefab;
     public static Diamond TileDiamond =>
         _instance._tileDiamondPrefab;
+    [SerializeField] Diamond _tileDiamondPrefab;
     public static Emerald TileEmerald =>
         _instance._tileEmeraldPrefab;
+    [SerializeField] Emerald _tileEmeraldPrefab;
     public static Gold TileGold =>
         _instance._tileGoldPrefab;
-    public static Mine TileMine =>
-        _instance._tileMinePrefab;
+    [SerializeField] Gold _tileGoldPrefab;
+    public static PinkDiamond TilePinkDiamond =>
+        _instance._tilePinkDiamondPrefab;
+    [SerializeField] PinkDiamond _tilePinkDiamondPrefab;
+    public static Platinum TilePlatinum =>
+        _instance._tilePlatinumPrefab;
+    [SerializeField] Platinum _tilePlatinumPrefab;
+    public static Ruby TileRuby =>
+        _instance._tileRubyPrefab;
+    [SerializeField] Ruby _tileRubyPrefab;
+    public static Sapphire TileSapphire =>
+        _instance._tileSapphirePrefab;
+    [SerializeField] Sapphire _tileSapphirePrefab;
+    public static Silver TileSilver =>
+        _instance._tileSilverPrefab;
+    [SerializeField] Silver _tileSilverPrefab;
     public static IndestructibleRock TileIndestructibleRock =>
         _instance._tileIndestructibleRockPrefab;
+    [SerializeField] IndestructibleRock _tileIndestructibleRockPrefab;
     public static PlayerBomb TilePlayerBomb =>
         _instance._tilePlayerBombPrefab;
+    [SerializeField] PlayerBomb _tilePlayerBombPrefab;
     public static Rock TileRock =>
         _instance._tileRockPrefab;
+    [SerializeField] Rock _tileRockPrefab;
     
     public static int TilesSpawnDistanceX =>
         _instance._tilesSpawnDistanceX;
+    [SerializeField] int _tilesSpawnDistanceX = 14;
     public static int TilesSpawnDistanceY =>
         _instance._tilesSpawnDistanceY;
+    [SerializeField] int _tilesSpawnDistanceY = 10;
 
     public static float TimerStartingTime =>
         _instance._timerStartingTime;
+    [SerializeField] float _timerStartingTime = 93f;
     
-    static S _instance;
 
-    #pragma warning disable CS0649
-    [SerializeField]
-    float _adFirstAfter = 120f;
-    [SerializeField]
-    float _adMinTimeBetween = 240f;
-    [SerializeField]
-    float _adDelay = 1.5f;
-    [SerializeField]
-    float _adCheckPeriod = 0.1f;
-    [SerializeField]
-    float _adGiveUpAfter = 5f;
-
-    [SerializeField]
-    float _audioMasterVolumeOn = -15f;
-    [SerializeField]
-    float _audioVolumeOff = -80f;
-
-    [SerializeField]
-    GameObject _availableBombPrefab;
-    [SerializeField]
-    int _availableBombLimit = 6;
-    [SerializeField]
-    float _availableBombInitialCooldown = 5f;
-    [SerializeField]
-    float _availableBombGrowShrinkTime = 0.5f;
-
-    [SerializeField]
-    AnimationCurve _dropExtraBombPowerChance;
-    [SerializeField]
-    AnimationCurve _dropExtraLifeChance;
-    [SerializeField]
-    AnimationCurve _dropExtraSpeedChance;
-    [SerializeField]
-    AnimationCurve _dropExtraTimeChance;
-    [SerializeField]
-    AnimationCurve _dropMultibombChance;
-    [SerializeField]
-    AnimationCurve _dropGoldChance;
-    [SerializeField]
-    AnimationCurve _dropEmeraldChance;
-    [SerializeField]
-    AnimationCurve _dropDiamondChance;
-    [SerializeField]
-    AnimationCurve _dropMineChance;
-
-    [SerializeField]
-    float _explosionLifetime = 0.7f;
-    [SerializeField]
-    float _explosionEndBurnAt = 0.7f;
-    [SerializeField]
-    float _explosionSafeDistance = 0.3f;
-    [SerializeField]
-    float _explosionCombustAfter = 0.1f;
-
-    [SerializeField]
-    GameObject _floorPiecePrefab;
-    [SerializeField]
-    Vector2 _floorUnitSize = new Vector2(32f, 32f);
-    [SerializeField]
-    Vector2Int _floorNumCopies = new Vector2Int(3, 3);
-
-    [SerializeField]
-    int _gameTargetFrameRate = 60;
-
-    [SerializeField]
-    float _gameplayUIAnimTime = 1.5f;
-
-    [SerializeField]
-    float _mainCameraZoomTime = 3f;
-
-    [SerializeField]
-    float _mineExplodeAfter = 4f;
-    [SerializeField]
-    float _mineCombustAt = 0.975f;
-    [SerializeField]
-    float _mineDestroyAfter = 0.25f;
-    [SerializeField]
-    float _minePlacedDurationMultiplier = 2f;
-
-    [SerializeField]
-    GameObject _mineExplosionPrefab;
-    [SerializeField]
-    int _mineExplosionReach = 2;
-
-    [SerializeField]
-    GameObject _objectLootedParticle;
-    [SerializeField]
-    float _objectLootedShrinkTime = 0.25f;
-
-    [SerializeField]
-    AnimationCurve _placeExtraBombPowerChance;
-    [SerializeField]
-    AnimationCurve _placeExtraLifeChance;
-    [SerializeField]
-    AnimationCurve _placeExtraSpeedChance;
-    [SerializeField]
-    AnimationCurve _placeExtraTimeChance;
-    [SerializeField]
-    AnimationCurve _placeMultibombChance;
-    [SerializeField]
-    AnimationCurve _placeIndestructibleRockChance;
-    [SerializeField]
-    AnimationCurve _placeRockChance;
-    [SerializeField]
-    AnimationCurve _placeMineChance;
-    
-    [SerializeField]
-    float _playerMoveTime = 0.3f;
-    [SerializeField]
-    float _playerMaxRotationPerSecond = 480f;
-    [SerializeField]
-    GameObject _playerAshPrefab;
-    [SerializeField]
-    float _playerBurnTime = 0.6f;
-
-    [SerializeField]
-    float _playerBombExplodeAfter = 2f;
-    [SerializeField]
-    float _playerBombCombustAt = 0.975f;
-    [SerializeField]
-    float _playerBombDestroyAfter = 0.25f;
-
-    [SerializeField]
-    GameObject _playerExplosionPrefab;
-    [SerializeField]
-    float _playerExplosionFanOutTime = 0.15f;
-    [SerializeField]
-    float _playerExplosionPierceRatio = 0.2f;
-
-    [SerializeField]
-    float _powerupLifetime = 6f;
-    [SerializeField]
-    int _powerupBombPowerLimit = 10;
-    [SerializeField]
-    float _powerupExtraLifeSaveDuration = 1f;
-    [SerializeField]
-    float _powerupExtraLifeCooldown = 40f;
-    [SerializeField]
-    int _powerupExtraSpeedLimit = 5;
-    [SerializeField]
-    float _powerupExtraSpeedDifference = 0.025f;
-    [SerializeField]
-    float _powerupExtraTimeAmount = 20f;
-    [SerializeField]
-    float _powerupExtraTimeCooldown = 5f;
-    [SerializeField]
-    int _powerupMultibombLimit = 6;
-    [SerializeField]
-    float _powerupMultibombDifference = 0.6f;
-
-    [SerializeField]
-    int _scoreFromGold = 1;
-    [SerializeField]
-    int _scoreFromEmerald = 4;
-    [SerializeField]
-    int _scoreFromDiamond = 7;
-
-    [SerializeField]
-    ExtraBombPower _tileExtraBombPowerPrefab;
-    [SerializeField]
-    ExtraLife _tileExtraLifePrefab;
-    [SerializeField]
-    ExtraSpeed _tileExtraSpeedPrefab;
-    [SerializeField]
-    ExtraTime _tileExtraTimePrefab;
-    [SerializeField]
-    Multibomb _tileMultibombPrefab;
-    [SerializeField]
-    Diamond _tileDiamondPrefab;
-    [SerializeField]
-    Emerald _tileEmeraldPrefab;
-    [SerializeField]
-    Gold _tileGoldPrefab;
-    [SerializeField]
-    Mine _tileMinePrefab;
-    [SerializeField]
-    IndestructibleRock _tileIndestructibleRockPrefab;
-    [SerializeField]
-    PlayerBomb _tilePlayerBombPrefab;
-    [SerializeField]
-    Rock _tileRockPrefab;
-    
-    [SerializeField]
-    int _tilesSpawnDistanceX = 14;
-    [SerializeField]
-    int _tilesSpawnDistanceY = 10;
-
-    [SerializeField]
-    float _timerStartingTime = 93f;
+    [SerializeField] int _gameTargetFrameRate = 60;
     #pragma warning restore CS0649
 
     void Awake()
     {
         _instance = this;
         Application.targetFrameRate = _gameTargetFrameRate;
+
+        LootableDescriptions = new Dictionary<Lootable, string>
+        {   { Lootable.Bronze, string.Format("+{0} score", ScoreFromBronze) }
+        ,   { Lootable.Diamond, string.Format("+{0} score", ScoreFromDiamond) }
+        ,   { Lootable.Emerald, string.Format("+{0} score", ScoreFromEmerald) }
+        ,   { Lootable.ExtraBombPower, "Increases your bombs' explosion distance. When at max, allows explosions to pierce through a rock" }
+        ,   { Lootable.ExtraLife, "Saves you from death once. Can only carry one at a time" }
+        ,   { Lootable.ExtraSpeed, "Makes you move faster" }
+        ,   { Lootable.ExtraTime, string.Format("+{0} seconds to timer", PowerupExtraTimeAmount) }
+        ,   { Lootable.Gold, string.Format("+{0} score", ScoreFromGold) }
+        ,   { Lootable.Multibomb, "Makes your bombs recharge faster" }
+        ,   { Lootable.PinkDiamond, string.Format("+{0} score", ScoreFromPinkDiamond) }
+        ,   { Lootable.Platinum, string.Format("+{0} score", ScoreFromPlatinum) }
+        ,   { Lootable.Ruby, string.Format("+{0} score", ScoreFromRuby) }
+        ,   { Lootable.Sapphire, string.Format("+{0} score", ScoreFromSapphire) }
+        ,   { Lootable.Silver, string.Format("+{0} score", ScoreFromSilver) }
+        };
     }
+}
+
+public enum Lootable
+{
+    Bronze,
+    Diamond,
+    Emerald,
+    ExtraBombPower,
+    ExtraLife,
+    ExtraSpeed,
+    ExtraTime,
+    Gold,
+    Multibomb,
+    PinkDiamond,
+    Platinum,
+    Ruby,
+    Sapphire,
+    Silver
 }

@@ -16,6 +16,8 @@ public class Rock : CustomTile, IPlaceableTile
     
     protected override void OnBurn()
     {
+        ++Stats.RocksDestroyed;
+
         CleanUp();
 
         if (!preventDrops)
@@ -60,10 +62,15 @@ public class Rock : CustomTile, IPlaceableTile
             ,   S.TileMultibomb
             ,   S.TileExtraSpeed
             ,   S.TileExtraTime
-            ,   S.TileMine
+            ,   S.TileBronze
             ,   S.TileDiamond
             ,   S.TileEmerald
             ,   S.TileGold
+            ,   S.TilePinkDiamond
+            ,   S.TilePlatinum
+            ,   S.TileRuby
+            ,   S.TileSapphire
+            ,   S.TileSilver
             };
         }
     }

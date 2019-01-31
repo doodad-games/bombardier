@@ -3,25 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour
+public abstract class Explosion : MonoBehaviour
 {
-    bool _initalised;
-    bool _isMine;
     bool _burnCompleted;
     List<ICustomTile> _tilesHit;
 
-    protected void Initialise(bool isMine)
-    {
-        if (_initalised) { throw new NotSupportedException(); }
-        _initalised = true;
-
-        _isMine = isMine;
-    }
-
     protected virtual void Start()
     {
-        if (!_initalised) { throw new NotSupportedException(); }
-
         GetComponent<Animator>()
             .SetFloat("PlaybackSpeed", 1 / S.ExplosionLifetime);
 
@@ -35,12 +23,12 @@ public class Explosion : MonoBehaviour
         var player = other.GetComponent<Player>();
         if (player == null) { return; }
 
-        player.Burn(_isMine);
+        player.Burn();
     }
 
     protected IEnumerator Combust(ICustomTile tile, bool preventDrops = false)
     {
-        if (tile is PlayerBomb || tile is Mine)
+        if (tile is PlayerBomb)
         {
             tile.Combust();
             yield break;

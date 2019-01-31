@@ -8,7 +8,7 @@ public class Emerald : LootableObject, IDropableTile
     
     protected override void OnLooted()
     {
-        Score.Amount += S.ScoreFromEmerald;
-        Sounds.Emerald.Play();
+        Score.Add(S.ScoreFromEmerald);
+        Sounds.Points2.Play();
     }
 }

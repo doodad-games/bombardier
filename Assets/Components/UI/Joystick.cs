@@ -13,11 +13,12 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     GameObject _thumb;
     #pragma warning restore CS0649
 
+    bool _inUse;
+
     public void OnPointerDown(PointerEventData eventData)
     {
+        _inUse = true;
         UpdateThumbPos(eventData);
-
-        _thumb.SetActive(true);
     }
 
     public void OnDrag(PointerEventData eventData) =>
@@ -25,7 +26,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        _thumb.SetActive(false);
+        _inUse = false;
+        _thumb.transform.position = _pad.bounds.center;
 
         Horizontal = 0f;
         Vertical = 0f;
@@ -33,8 +35,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         
     void Update()
     {
-        if (!_thumb.activeInHierarchy) { return; }
-        
+        if (!_inUse) return;
+
         var thumbPos = _thumb.transform.position;
 
         Horizontal = 

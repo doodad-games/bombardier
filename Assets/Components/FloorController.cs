@@ -5,7 +5,7 @@ public class FloorController : MonoBehaviour
     static FloorController _instance;
 
     static FloorController() =>
-        Player.SubGameOver((c) => _instance.enabled = false);
+        Player.onGameOver += (c) => _instance.enabled = false;
 
     Vector2 _unitSize;
 

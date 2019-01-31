@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExtraTime : LootableObject, IDropableTile, IPlaceableTile, IActionedTile
+public class ExtraTime : LootableObject, IDropableTile, IActionedTile
 {
     static float _nextAvailableAfter;
 
@@ -8,10 +8,6 @@ public class ExtraTime : LootableObject, IDropableTile, IPlaceableTile, IActione
         Time.time > _nextAvailableAfter &&
         UnityEngine.Random.value <
             S.DropExtraTimeChance.Evaluate(-pos.y);
-
-    public bool RollForPlacement(Vector2Int pos) =>
-        UnityEngine.Random.value <
-            S.PlaceExtraTimeChance.Evaluate(-pos.y);
 
     public void PlacedOrDropped(Vector2Int pos, bool isDropped)
     {

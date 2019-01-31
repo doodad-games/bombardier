@@ -43,11 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029f2921d41ec43979cdf3fd6ff12b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _adFirstAfter: 120
-  _adMinTimeBetween: 240
-  _adDelay: 1.5
-  _adCheckPeriod: 0.1
-  _adGiveUpAfter: 5
   _audioMasterVolumeOn: -15
   _audioVolumeOff: -80
   _availableBombPrefab: {fileID: 7072556381645470527, guid: 6949c3008c49b4778889c389254c28e8,
@@ -114,22 +109,22 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.03
-      inSlope: 0.00074483023
-      outSlope: 0.00074483023
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.15072463
-    - serializedVersion: 3
-      time: 100
-      value: 0.06
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      value: 0.075
+      inSlope: -0.000125
+      outSlope: -0.000125
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 200
+      value: 0.05
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -148,11 +143,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _dropGoldChance:
+  _dropBronzeChance:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 20
       value: 0.3
       inSlope: 0
       outSlope: 0
@@ -161,8 +156,23 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 30
-      value: 0.45
+      time: 100
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropSilverChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.15
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -170,8 +180,98 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 70
-      value: 0
+      time: 40
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 120
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropGoldChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.08
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 60
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 140
+      value: 0.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropPlatinumChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.02
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 80
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropSapphireChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.01
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 50
+      value: 0.08
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -185,7 +285,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 10
       value: 0
       inSlope: 0
       outSlope: 0
@@ -194,17 +294,23 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 20
-      value: 0.15
-      inSlope: 0.0075000003
-      outSlope: 0.003
-      tangentMode: 69
+      time: 80
+      value: 0.04
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropRubyChance:
+    serializedVersion: 2
+    m_Curve:
     - serializedVersion: 3
-      time: 70
-      value: 0.3
+      time: 20
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -213,7 +319,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 110
-      value: 0
+      value: 0.02
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -227,7 +333,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 30
       value: 0
       inSlope: 0
       outSlope: 0
@@ -236,41 +342,32 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 50
-      value: 0.15
-      inSlope: 0.004090909
-      outSlope: 0.004090909
+      time: 140
+      value: 0.01
+      inSlope: 0
+      outSlope: 0
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 110
-      value: 0.45
-      inSlope: 0.0024285715
-      outSlope: 0.0024285715
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 400
-      value: 1
-      inSlope: 0.0018965518
-      outSlope: 0.0020632697
-      tangentMode: 5
-      weightedMode: 0
-      inWeight: 0.17196213
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _dropMineChance:
+  _dropPinkDiamondChance:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 40
       value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 170
+      value: 0.005
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -288,49 +385,11 @@ MonoBehaviour:
     type: 3}
   _floorUnitSize: {x: 32, y: 32}
   _floorNumCopies: {x: 3, y: 3}
-  _gameTargetFrameRate: 60
   _gameplayUIAnimTime: 1.5
   _mainCameraZoomTime: 3
-  _mineExplodeAfter: 4
-  _mineCombustAt: 0.975
-  _mineDestroyAfter: 0.25
-  _minePlacedDurationMultiplier: 2
-  _mineExplosionPrefab: {fileID: 7412922891362607423, guid: 2417d67c0511c4f43a4bc383d222689e,
-    type: 3}
-  _mineExplosionReach: 2
   _objectLootedParticle: {fileID: 2850170054097354705, guid: e898d117768f0490eb1d92f8adb8f316,
     type: 3}
   _objectLootedShrinkTime: 0.25
-  _placeExtraBombPowerChance:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _placeExtraLifeChance:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _placeExtraSpeedChance:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _placeExtraTimeChance:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _placeMultibombChance:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   _placeIndestructibleRockChance:
     serializedVersion: 2
     m_Curve:
@@ -370,32 +429,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _placeMineChance:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 10
-      value: 0
-      inSlope: 0.000121203484
-      outSlope: 0.000121203484
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.15362318
-    - serializedVersion: 3
-      time: 200
-      value: 0.05
-      inSlope: 0.000009732892
-      outSlope: 0.000009732892
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.2550724
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _playerMoveTime: 0.3
-  _playerMaxRotationPerSecond: 480
   _playerAshPrefab: {fileID: 1012816045702770045, guid: 36c589c7d1c2341c7b440586ef235b81,
     type: 3}
   _playerBurnTime: 0.6
@@ -405,20 +438,30 @@ MonoBehaviour:
   _playerExplosionPrefab: {fileID: 5506311327938120727, guid: 12f448a8a998842a88c443990650e78d,
     type: 3}
   _playerExplosionFanOutTime: 0.15
-  _playerExplosionPierceRatio: 0.2
-  _powerupLifetime: 6
+  _playerMoveTime: 0.3
+  _playerMoveUpdatePosAt: 0.8
+  _playerMoveDontUndoAt: 0.35
+  _playerMoveMaxRotationPerSecond: 540
   _powerupBombPowerLimit: 10
   _powerupExtraLifeSaveDuration: 1
   _powerupExtraLifeCooldown: 40
   _powerupExtraSpeedLimit: 5
-  _powerupExtraSpeedDifference: 0.025
+  _powerupExtraSpeedDifference: 0.02
   _powerupExtraTimeAmount: 20
   _powerupExtraTimeCooldown: 5
   _powerupMultibombLimit: 6
-  _powerupMultibombDifference: 0.6
-  _scoreFromGold: 1
-  _scoreFromEmerald: 4
-  _scoreFromDiamond: 7
+  _powerupMultibombDifference: 0.5
+  _scoreFromBronze: 1
+  _scoreFromSilver: 2
+  _scoreFromGold: 4
+  _scoreFromPlatinum: 8
+  _scoreFromSapphire: 16
+  _scoreFromEmerald: 32
+  _scoreFromRuby: 64
+  _scoreFromDiamond: 128
+  _scoreFromPinkDiamond: 256
+  _spriteLootableUnknown: {fileID: 21300000, guid: 5bd2df9d6f1a1436b8cb60df29f2963f,
+    type: 3}
   _tileExtraBombPowerPrefab: {fileID: 4612681789032088084, guid: 73ed90b7a3e6244e4af99e1f2fc21da8,
     type: 3}
   _tileExtraLifePrefab: {fileID: 7162301374402953314, guid: 11c2cb1093bc44375afc944604d11f66,
@@ -429,13 +472,23 @@ MonoBehaviour:
     type: 3}
   _tileMultibombPrefab: {fileID: 6945556443809891831, guid: 06b61ce4adec749acab30763c3c312b8,
     type: 3}
+  _tileBronzePrefab: {fileID: 486428316456722563, guid: a6a32a42fdf2e4773b36cfe78c0c0203,
+    type: 3}
   _tileDiamondPrefab: {fileID: 6456432330771414850, guid: 4b39523838ee64d6b8dd8d0ab6f542d2,
     type: 3}
   _tileEmeraldPrefab: {fileID: 4842274068765088106, guid: ce221ead51db145dabb90c057e01dd75,
     type: 3}
   _tileGoldPrefab: {fileID: 2395834394148837651, guid: 31f63edc597bc462cbcad5523cf31942,
     type: 3}
-  _tileMinePrefab: {fileID: 3295887556113005127, guid: d436fa583e14b4e32a0d06bf86430157,
+  _tilePinkDiamondPrefab: {fileID: 1886247286748798010, guid: 556738734822b4dedae63d81c27bed3c,
+    type: 3}
+  _tilePlatinumPrefab: {fileID: 2244381983941684700, guid: fd9395750b3f34adfa3cded325123974,
+    type: 3}
+  _tileRubyPrefab: {fileID: 6010366204446311882, guid: 964f66dc29e3a43259c71ace504938ff,
+    type: 3}
+  _tileSapphirePrefab: {fileID: 7340824107829726246, guid: 89ce7fb011f7642a094246dec51bec16,
+    type: 3}
+  _tileSilverPrefab: {fileID: 7265916066313431517, guid: 2f0c01d76eb9c45d69a10c03ee16ee44,
     type: 3}
   _tileIndestructibleRockPrefab: {fileID: 4706577151508500245, guid: 34d4c224b25f54c5c94259ff4bc6095f,
     type: 3}
@@ -446,3 +499,4 @@ MonoBehaviour:
   _tilesSpawnDistanceX: 14
   _tilesSpawnDistanceY: 10
   _timerStartingTime: 93
+  _gameTargetFrameRate: 60
