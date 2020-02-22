@@ -16,7 +16,7 @@ public static class Stats
     public static int TotalScore
     {
         get => GetIntPref("totalScore");
-        set => SetIntPref("totalScore", value);
+        set => IncIntPrefTo("totalScore", value);
     }
 
     public static int HighestScore
@@ -28,14 +28,14 @@ public static class Stats
     public static int DistanceTravelled
     {
         get => GetIntPref("distanceTravelled");
-        set => SetIntPref("distanceTravelled", value);
+        set => IncIntPrefTo("distanceTravelled", value);
     }
     public static int DistanceTravelledDiff => GetIntPrefDiff("distanceTravelled");
 
     public static int DepthTravelled
     {
         get => GetIntPref("depthTravelled");
-        set => SetIntPref("depthTravelled", value);
+        set => IncIntPrefTo("depthTravelled", value);
     }
     public static int DepthTravelledDiff => GetIntPrefDiff("depthTravelled");
 
@@ -48,71 +48,67 @@ public static class Stats
     public static float TimePlayed
     {
         get => GetFloatPref("timePlayed");
-        set => SetFloatPref("timePlayed", value);
+        set => IncFloatPrefTo("timePlayed", value);
     }
 
     public static int GamesStarted
     {
         get => GetIntPref("gamesStarted");
-        set => SetIntPref("gamesStarted", value);
+        set => IncIntPrefTo("gamesStarted", value);
     }
 
     public static int LossesByTime
     {
         get => GetIntPref("lossesByTime");
-        set => SetIntPref("lossesByTime", value);
+        set => IncIntPrefTo("lossesByTime", value);
     }
 
     public static int LossesByOwnBomb
     {
         get => GetIntPref("lossesByOwnBomb");
-        set => SetIntPref("lossesByOwnBomb", value);
+        set => IncIntPrefTo("lossesByOwnBomb", value);
     }
 
     public static int ExtraLivesLost
     {
         get => GetIntPref("extraLivesLost");
-        set => SetIntPref("extraLivesLost", value);
+        set => IncIntPrefTo("extraLivesLost", value);
     }
     public static int ExtraLivesLostDiff => GetIntPrefDiff("extraLivesLost");
 
     public static int BombsPlaced
     {
         get => GetIntPref("bombsPlaced");
-        set => SetIntPref("bombsPlaced", value);
+        set => IncIntPrefTo("bombsPlaced", value);
     }
     public static int BombsPlacedDiff => GetIntPrefDiff("bombsPlaced");
 
     public static int LootCollected
     {
         get => GetIntPref("lootCollected");
-        set => SetIntPref("lootCollected", value);
+        set => IncIntPrefTo("lootCollected", value);
     }
     public static int LootCollectedDiff => GetIntPrefDiff("lootCollected");
 
     public static int LootDestroyed
     {
         get => GetIntPref("lootDestroyed");
-        set => SetIntPref("lootDestroyed", value);
+        set => IncIntPrefTo("lootDestroyed", value);
     }
     public static int LootDestroyedDiff => GetIntPrefDiff("lootDestroyed");
 
     public static int RocksDestroyed
     {
         get => GetIntPref("rocksDestroyed");
-        set => SetIntPref("rocksDestroyed", value);
+        set => IncIntPrefTo("rocksDestroyed", value);
     }
     public static int RocksDestroyedDiff => GetIntPrefDiff("rocksDestroyed");
 
     static Stats() =>
         SceneManager.sceneUnloaded += _ =>
             _intPrefOldValues.Clear();
-    public static void IncLootableCount(Lootable lootable)
-    {
-        var pref = LootablePref(lootable);
-
-        SetIntPref(pref, GetIntPref(pref) + 1);
-    }
+    public static void IncLootableCount(Lootable lootable) =>
+        IncIntPref(LootablePref(lootable));
 
     public static int GetLootableCount(Lootable lootable) =>
         GetIntPref(LootablePref(lootable));
@@ -135,6 +131,32 @@ public static class Stats
 
         PlayerPrefs.SetInt(pref, value);
         _intPrefs[pref] = value;
+
+        Kongregate.SetStat(pref, value);
+    }
+
+    static void IncIntPref(string pref, int amount = 1)
+    {
+        if (!_intPrefOldValues.ContainsKey(pref))
+            _intPrefOldValues[pref] = GetIntPref(pref);
+
+        var newVal = GetIntPref(pref) + amount;
+
+        PlayerPrefs.SetInt(pref, newVal);
+        _intPrefs[pref] = newVal;
+
+        Kongregate.SetStat(pref, amount);
+    }
+    
+    static void IncIntPrefTo(string pref, int value)
+    {
+        if (!_intPrefOldValues.ContainsKey(pref))
+            _intPrefOldValues[pref] = GetIntPref(pref);
+
+        var inc = value - GetIntPref(pref);
+        if (inc < 0) return;
+
+        IncIntPref(pref, inc);
     }
 
     static int GetIntPrefDiff(string pref) =>
@@ -150,10 +172,18 @@ public static class Stats
         return _floatPrefs[pref];
     }
 
-    static void SetFloatPref(string pref, float value)
+    static void IncFloatPrefTo(string pref, float value)
     {
+        if (!_floatPrefs.ContainsKey(pref))
+            _floatPrefs[pref] = GetFloatPref(pref);
+
+        var inc = value - GetFloatPref(pref);
+        if (inc < 0) return;
+
         PlayerPrefs.SetFloat(pref, value);
         _floatPrefs[pref] = value;
+
+        Kongregate.SetStat(pref, Mathf.RoundToInt(inc));
     }
 
     static string LootablePref(Lootable lootable) =>
