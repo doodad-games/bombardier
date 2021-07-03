@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using MyLibrary;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
     Quaternion _rotateTo;
     int _deepest;
 
-    public void Burn()
+    public void Burn(Explosion.Source source)
     {
         if (GameOver != null || Time.time < _safeUntil) { return; }
 
@@ -154,7 +154,6 @@ public class Player : MonoBehaviour
         _animator.SetTrigger("Burn");
         Sounds.Burn();
 
-        ++Stats.LossesByOwnBomb;
 
         Instantiate(
             S.PlayerAsh,
@@ -168,7 +167,16 @@ public class Player : MonoBehaviour
 
         Destroy(gameObject, S.PlayerBurnTime);
 
-        EndGame(CauseOfGameOver.PlayerBomb);
+        if (source == Explosion.Source.PlayerBomb)
+        {
+            ++Stats.LossesByOwnBomb;
+            EndGame(CauseOfGameOver.PlayerBomb);
+        }
+        else if (source == Explosion.Source.Mine)
+        {
+            ++Stats.LossesByMines;
+            EndGame(CauseOfGameOver.Mine);
+        }
     }
 
     void Awake()
@@ -205,7 +213,10 @@ public class Player : MonoBehaviour
 
         if (Score.IsHighscore)
             Sounds.HighScore.Play();
-        else if (cause == CauseOfGameOver.PlayerBomb)
+        else if (
+            cause == CauseOfGameOver.PlayerBomb ||
+            cause == CauseOfGameOver.Mine
+        )
             Sounds.PlayerBurn.Play();
         else
             Sounds.TimeOut.Play();
@@ -217,6 +228,7 @@ public class Player : MonoBehaviour
 
         enabled = false;
         Sounds.Movement.Pause();
+        KVS.Save();
     }
 
     Vector2Int? _ClosestEmptyTile()
@@ -487,6 +499,7 @@ public class Player : MonoBehaviour
     public enum CauseOfGameOver
     {
         PlayerBomb,
+        Mine,
         Time
     }
 }

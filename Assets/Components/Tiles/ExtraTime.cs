@@ -9,9 +9,9 @@ public class ExtraTime : LootableObject, IDropableTile, IActionedTile
         UnityEngine.Random.value <
             S.DropExtraTimeChance.Evaluate(-pos.y);
 
-    public void PlacedOrDropped(Vector2Int pos, bool isDropped)
+    public void PlacedOrDropped(Vector2Int pos)
     {
-        if (!isDropped) { return; }
+        if (!IsDropped) { return; }
         _nextAvailableAfter = Time.time + S.PowerupExtraTimeCooldown;
     }
 

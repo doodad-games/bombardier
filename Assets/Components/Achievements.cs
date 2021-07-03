@@ -4,40 +4,26 @@ using UnityEngine.EventSystems;
 
 public class Achievements : MonoBehaviour, IPointerClickHandler
 {
-    #pragma warning disable CS0649
-    [SerializeField]
-    GameObject _closeButton;
-    [SerializeField]
-    RectTransform _scrollContents;
-    [SerializeField]
-    TextMeshProUGUI _totalScore;
-    [SerializeField]
-    TextMeshProUGUI _highestScore;
-    [SerializeField]
-    TextMeshProUGUI _distanceTravelled;
-    [SerializeField]
-    TextMeshProUGUI _depthTravelled;
-    [SerializeField]
-    TextMeshProUGUI _deepestReached;
-    [SerializeField]
-    TextMeshProUGUI _timePlayed;
-    [SerializeField]
-    TextMeshProUGUI _gamesStarted;
-    [SerializeField]
-    TextMeshProUGUI _lossesByTime;
-    [SerializeField]
-    TextMeshProUGUI _lossesByOwnBomb;
-    [SerializeField]
-    TextMeshProUGUI _extraLivesLost;
-    [SerializeField]
-    TextMeshProUGUI _bombsPlaced;
-    [SerializeField]
-    TextMeshProUGUI _rocksDestroyed;
-    [SerializeField]
-    TextMeshProUGUI _lootDestroyed;
-    [SerializeField]
-    TextMeshProUGUI _lootCollected;
-    #pragma warning restore CS0649
+#pragma warning disable CS0649
+    [SerializeField] GameObject _closeButton;
+    [SerializeField] RectTransform _scrollContents;
+    [SerializeField] TextMeshProUGUI _totalScore;
+    [SerializeField] TextMeshProUGUI _highestScore;
+    [SerializeField] TextMeshProUGUI _distanceTravelled;
+    [SerializeField] TextMeshProUGUI _depthTravelled;
+    [SerializeField] TextMeshProUGUI _deepestReached;
+    [SerializeField] TextMeshProUGUI _timePlayed;
+    [SerializeField] TextMeshProUGUI _gamesStarted;
+    [SerializeField] TextMeshProUGUI _lossesByTime;
+    [SerializeField] TextMeshProUGUI _lossesByOwnBomb;
+    [SerializeField] TextMeshProUGUI _lossesByMines;
+    [SerializeField] TextMeshProUGUI _extraLivesLost;
+    [SerializeField] TextMeshProUGUI _bombsPlaced;
+    [SerializeField] TextMeshProUGUI _minesDetonated;
+    [SerializeField] TextMeshProUGUI _rocksDestroyed;
+    [SerializeField] TextMeshProUGUI _lootDestroyed;
+    [SerializeField] TextMeshProUGUI _lootCollected;
+#pragma warning restore CS0649
 
     Animator _animator;
 
@@ -58,6 +44,15 @@ public class Achievements : MonoBehaviour, IPointerClickHandler
         _animator = GetComponent<Animator>();
 
     void OnEnable()
+    {
+        Stats.onStatsRefreshed += Redraw;
+        Redraw();
+    }
+
+    void OnDisable() =>
+        Stats.onStatsRefreshed -= Redraw;
+
+    void Redraw()
     {
         var fromPlay = !GameplayUI.MenuShowing;
 
@@ -106,6 +101,12 @@ public class Achievements : MonoBehaviour, IPointerClickHandler
             "orange"
         );
 
+        _lossesByMines.text = StatWithDiff(
+            Stats.LossesByMines,
+            Player.GameOver == Player.CauseOfGameOver.Mine ? 1 : 0,
+            "orange"
+        );
+
         _extraLivesLost.text = StatWithDiff(
             Stats.ExtraLivesLost,
             Stats.ExtraLivesLostDiff,
@@ -115,6 +116,11 @@ public class Achievements : MonoBehaviour, IPointerClickHandler
         _bombsPlaced.text = StatWithDiff(
             Stats.BombsPlaced,
             Stats.BombsPlacedDiff
+        );
+
+        _minesDetonated.text = StatWithDiff(
+            Stats.MinesDetonated,
+            Stats.MinesDetonatedDiff
         );
 
         _rocksDestroyed.text = StatWithDiff(

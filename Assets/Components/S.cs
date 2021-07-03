@@ -43,6 +43,12 @@ public class S : MonoBehaviour
     public static AnimationCurve DropExtraTimeChance =>
         _instance._dropExtraTimeChance;
     [SerializeField] AnimationCurve _dropExtraTimeChance;
+    public static AnimationCurve DropGoldenTimeChance =>
+        _instance._dropGoldenTimeChance;
+    [SerializeField] AnimationCurve _dropGoldenTimeChance;
+    public static AnimationCurve DropMineChance =>
+        _instance._dropMineChance;
+    [SerializeField] AnimationCurve _dropMineChance;
     public static AnimationCurve DropMultibombChance =>
         _instance._dropMultibombChance;
     [SerializeField] AnimationCurve _dropMultibombChance;
@@ -105,6 +111,29 @@ public class S : MonoBehaviour
         _instance._mainCameraZoomTime;
     [SerializeField] float _mainCameraZoomTime = 3f;
     
+    public static float MineExplodeAfter =>
+        _instance._mineExplodeAfter;
+    [SerializeField] float _mineExplodeAfter = 4f;
+    public static float MineCombustAt =>
+        _instance._mineCombustAt;
+    [SerializeField] float _mineCombustAt = 0.975f;
+    public static float MineDestroyAfter =>
+        _instance._mineDestroyAfter;
+    [SerializeField] float _mineDestroyAfter = 0.25f;
+    public static float MinePlaceDurationMultiplier =>
+        _instance._minePlacedDurationMultiplier;
+    [SerializeField] float _minePlacedDurationMultiplier = 2f;
+    public static bool MinePlacedHasReward =>
+        _instance._minePlacedHasReward;
+    [SerializeField] bool _minePlacedHasReward = false;
+
+    public static GameObject MineExplosion =>
+        _instance._mineExplosionPrefab;
+    [SerializeField] GameObject _mineExplosionPrefab;
+    public static int MineExplosionReach =>
+        _instance._mineExplosionReach;
+    [SerializeField] int _mineExplosionReach = 2;
+    
     public static GameObject ObjectLootedParticle =>
         _instance._objectLootedParticle;
     [SerializeField] GameObject _objectLootedParticle;
@@ -115,6 +144,9 @@ public class S : MonoBehaviour
     public static AnimationCurve PlaceIndestructibleRockChance =>
         _instance._placeIndestructibleRockChance;
     [SerializeField] AnimationCurve _placeIndestructibleRockChance;
+    public static AnimationCurve PlaceMineChance =>
+        _instance._placeMineChance;
+    [SerializeField] AnimationCurve _placeMineChance;
     public static AnimationCurve PlaceRockChance =>
         _instance._placeRockChance;
     [SerializeField] AnimationCurve _placeRockChance;
@@ -174,6 +206,9 @@ public class S : MonoBehaviour
     public static float PowerupExtraTimeAmount =>
         _instance._powerupExtraTimeAmount;
     [SerializeField] float _powerupExtraTimeAmount = 20f;
+    public static float PowerupGoldenTimeAmount =>
+        _instance._powerupGoldenTimeAmount;
+    [SerializeField] float _powerupGoldenTimeAmount = 50f;
     public static float PowerupExtraTimeCooldown =>
         _instance._powerupExtraTimeCooldown;
     [SerializeField] float _powerupExtraTimeCooldown = 5f;
@@ -228,6 +263,12 @@ public class S : MonoBehaviour
     public static ExtraTime TileExtraTime =>
         _instance._tileExtraTimePrefab;
     [SerializeField] ExtraTime _tileExtraTimePrefab;
+    public static GoldenTime TileGoldenTime =>
+        _instance._tileGoldenTimePrefab;
+    [SerializeField] GoldenTime _tileGoldenTimePrefab;
+    public static Mine TileMine =>
+        _instance._tileMinePrefab;
+    [SerializeField] Mine _tileMinePrefab;
     public static Multibomb TileMultibomb =>
         _instance._tileMultibombPrefab;
     [SerializeField] Multibomb _tileMultibombPrefab;
@@ -296,6 +337,7 @@ public class S : MonoBehaviour
         ,   { Lootable.ExtraLife, "Saves you from death once. Can only carry one at a time" }
         ,   { Lootable.ExtraSpeed, "Makes you move faster" }
         ,   { Lootable.ExtraTime, string.Format("+{0} seconds to timer", PowerupExtraTimeAmount) }
+        ,   { Lootable.GoldenTime, string.Format("+{0} seconds to timer", PowerupGoldenTimeAmount) }
         ,   { Lootable.Gold, string.Format("+{0} score", ScoreFromGold) }
         ,   { Lootable.Multibomb, "Makes your bombs recharge faster" }
         ,   { Lootable.PinkDiamond, string.Format("+{0} score", ScoreFromPinkDiamond) }
@@ -309,18 +351,19 @@ public class S : MonoBehaviour
 
 public enum Lootable
 {
-    Bronze,
-    Diamond,
-    Emerald,
-    ExtraBombPower,
-    ExtraLife,
-    ExtraSpeed,
-    ExtraTime,
-    Gold,
-    Multibomb,
-    PinkDiamond,
-    Platinum,
-    Ruby,
-    Sapphire,
-    Silver
+    Bronze = 0,
+    Diamond = 1,
+    Emerald = 2,
+    ExtraBombPower = 3,
+    ExtraLife = 4,
+    ExtraSpeed = 5,
+    ExtraTime = 6,
+    Gold = 7,
+    GoldenTime = 14,
+    Multibomb = 8,
+    PinkDiamond = 9,
+    Platinum = 10,
+    Ruby = 11,
+    Sapphire = 12,
+    Silver = 13
 }

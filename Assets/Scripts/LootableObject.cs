@@ -49,6 +49,8 @@ public abstract class LootableObject : CustomTile
 
     public override void Combust()
     {
+        if (Cleaned) { return; }
+
         ++Stats.LootDestroyed;
         base.Combust();
     }

@@ -12,8 +12,8 @@ public class TileController : MonoBehaviour
     public static IReadOnlyDictionary<Vector2Int, ICustomTile> Tiles =>
         _instance._tiles;
 
-    public static ICustomTile SpawnTile(ICustomTile tile, Vector2Int pos) =>
-        _instance._SpawnTile(tile, pos);
+    public static ICustomTile SpawnTile(ICustomTile tile, Vector2Int pos, bool isDropped) =>
+        _instance._SpawnTile(tile, pos, isDropped);
 
     Dictionary<Vector2Int, ICustomTile> _tiles;
     List<IPlaceableTile> _prioritisedTiles;
@@ -27,7 +27,8 @@ public class TileController : MonoBehaviour
     {
         _tiles = new Dictionary<Vector2Int, ICustomTile>();
         _prioritisedTiles = new List<IPlaceableTile>
-        {   S.TileIndestructibleRock
+        {   S.TileMine
+        ,   S.TileIndestructibleRock
         ,   S.TileRock
         };
 
@@ -77,11 +78,11 @@ public class TileController : MonoBehaviour
             }
         }
 
-        if (tile != null) { _SpawnTile(tile, pos); }
+        if (tile != null) { _SpawnTile(tile, pos, false); }
         else { _tiles[pos] = null; }
     }
 
-    ICustomTile _SpawnTile(ICustomTile tile, Vector2Int pos)
+    ICustomTile _SpawnTile(ICustomTile tile, Vector2Int pos, bool isDropped)
     {
         var retval = Instantiate(
             tile.GameObject(),
@@ -91,13 +92,11 @@ public class TileController : MonoBehaviour
         ).GetComponent<CustomTile>();
         
         _tiles[pos] = retval;
-        retval.Initialise(false);
+        retval.Initialise(isDropped);
         retval.SubOnDestroy(() => _tiles[pos] = null);
 
         if (retval is IActionedTile)
-        {
-            (retval as IActionedTile).PlacedOrDropped(pos, false);
-        }
+            (retval as IActionedTile).PlacedOrDropped(pos);
 
         return retval;
     }

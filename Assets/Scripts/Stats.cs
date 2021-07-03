@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using MyLibrary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class Stats
 {
+#pragma warning disable CS0067
+    public static event Action onStatsRefreshed;
+#pragma warning restore CS0067
+
     static Dictionary<string, int> _intPrefs =
         new Dictionary<string, int>();
     
@@ -69,6 +75,12 @@ public static class Stats
         set => IncIntPrefTo("lossesByOwnBomb", value);
     }
 
+    public static int LossesByMines
+    {
+        get => GetIntPref("lossesByMines");
+        set => IncIntPrefTo("lossesByMines", value);
+    }
+
     public static int ExtraLivesLost
     {
         get => GetIntPref("extraLivesLost");
@@ -97,6 +109,13 @@ public static class Stats
     }
     public static int LootDestroyedDiff => GetIntPrefDiff("lootDestroyed");
 
+    public static int MinesDetonated
+    {
+        get => GetIntPref("minesDetonated");
+        set => IncIntPrefTo("minesDetonated", value);
+    }
+    public static int MinesDetonatedDiff => GetIntPrefDiff("minesDetonated");
+
     public static int RocksDestroyed
     {
         get => GetIntPref("rocksDestroyed");
@@ -104,9 +123,23 @@ public static class Stats
     }
     public static int RocksDestroyedDiff => GetIntPrefDiff("rocksDestroyed");
 
-    static Stats() =>
+    static Stats()
+    {
         SceneManager.sceneUnloaded += _ =>
             _intPrefOldValues.Clear();
+    
+#if UNITY_IOS || CLOUDONCE_GOOGLE
+        KVSCloudOnceSyncer.onSyncedFromCloudOnce += () =>
+        {
+            _intPrefs.Clear();
+            _intPrefOldValues.Clear();
+            _floatPrefs.Clear();
+
+            onStatsRefreshed?.Invoke();
+        };
+#endif
+    }
+
     public static void IncLootableCount(Lootable lootable) =>
         IncIntPref(LootablePref(lootable));
 
@@ -119,7 +152,7 @@ public static class Stats
     static int GetIntPref(string pref)
     {
         if (!_intPrefs.ContainsKey(pref))
-            _intPrefs[pref] = PlayerPrefs.GetInt(pref, 0);
+            _intPrefs[pref] = KVSBridge.GetInt(pref, 0);
 
         return _intPrefs[pref];
     }
@@ -129,7 +162,7 @@ public static class Stats
         if (!_intPrefOldValues.ContainsKey(pref))
             _intPrefOldValues[pref] = GetIntPref(pref);
 
-        PlayerPrefs.SetInt(pref, value);
+        KVS.SetInt(pref, value);
         _intPrefs[pref] = value;
 
         Kongregate.SetStat(pref, value);
@@ -142,7 +175,7 @@ public static class Stats
 
         var newVal = GetIntPref(pref) + amount;
 
-        PlayerPrefs.SetInt(pref, newVal);
+        KVS.SetInt(pref, newVal);
         _intPrefs[pref] = newVal;
 
         Kongregate.SetStat(pref, amount);
@@ -167,7 +200,7 @@ public static class Stats
     static float GetFloatPref(string pref)
     {
         if (!_floatPrefs.ContainsKey(pref))
-            _floatPrefs[pref] = PlayerPrefs.GetFloat(pref, 0f);
+            _floatPrefs[pref] = KVSBridge.GetFloat(pref, 0f);
 
         return _floatPrefs[pref];
     }
@@ -180,7 +213,7 @@ public static class Stats
         var inc = value - GetFloatPref(pref);
         if (inc < 0) return;
 
-        PlayerPrefs.SetFloat(pref, value);
+        KVS.SetFloat(pref, value);
         _floatPrefs[pref] = value;
 
         Kongregate.SetStat(pref, Mathf.RoundToInt(inc));

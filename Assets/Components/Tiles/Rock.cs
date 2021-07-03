@@ -37,14 +37,7 @@ public class Rock : CustomTile, IPlaceableTile
             }
 
             if (tile != null)
-            {
-                var newTile = TileController.SpawnTile(tile, intPos);
-
-                if (newTile is IActionedTile)
-                {
-                    (newTile as IActionedTile).PlacedOrDropped(intPos, true);
-                }
-            }
+                TileController.SpawnTile(tile, intPos, true);
         }
 
         Destroy(gameObject);
@@ -59,9 +52,11 @@ public class Rock : CustomTile, IPlaceableTile
             _dropableTiles = new IDropableTile[]
             {   S.TileExtraLife
             ,   S.TileExtraBombPower
+            ,   S.TileMine
             ,   S.TileMultibomb
             ,   S.TileExtraSpeed
             ,   S.TileExtraTime
+            ,   S.TileGoldenTime
             ,   S.TileBronze
             ,   S.TileDiamond
             ,   S.TileEmerald

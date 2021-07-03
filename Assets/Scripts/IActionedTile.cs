@@ -2,5 +2,5 @@
 
 public interface IActionedTile : ICustomTile
 {
-    void PlacedOrDropped(Vector2Int pos, bool isDropped);
+    void PlacedOrDropped(Vector2Int pos);
 }

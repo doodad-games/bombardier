@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class Explosion : MonoBehaviour
 {
+    [HideInInspector] public Source source;
+
     bool _burnCompleted;
     List<ICustomTile> _tilesHit;
 
@@ -23,7 +25,7 @@ public abstract class Explosion : MonoBehaviour
         var player = other.GetComponent<Player>();
         if (player == null) { return; }
 
-        player.Burn();
+        player.Burn(source);
     }
 
     protected IEnumerator Combust(ICustomTile tile, bool preventDrops = false)
@@ -74,5 +76,12 @@ public abstract class Explosion : MonoBehaviour
             gameObject,
             S.ExplosionLifetime * (1 - S.ExplosionEndBurnAt)
         );
+    }
+
+    [Serializable]
+    public enum Source
+    {
+        PlayerBomb,
+        Mine
     }
 }

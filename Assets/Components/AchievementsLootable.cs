@@ -7,16 +7,12 @@ public class AchievementsLootable : MonoBehaviour
 {
     public static event Action<Sprite, string, Lootable> onLootablePressed;
 
-    #pragma warning disable CS0649
-    [SerializeField]
-    Image _image;
-    [SerializeField]
-    TextMeshProUGUI _name;
-    [SerializeField]
-    TextMeshProUGUI _count;
-    [SerializeField]
-    Lootable _type;
-    #pragma warning restore CS0649
+#pragma warning disable CS0649
+    [SerializeField] Image _image;
+    [SerializeField] TextMeshProUGUI _name;
+    [SerializeField] TextMeshProUGUI _count;
+    [SerializeField] Lootable _type;
+#pragma warning restore CS0649
 
     Sprite _ogSprite;
     string _ogName;
@@ -42,6 +38,15 @@ public class AchievementsLootable : MonoBehaviour
     }
 
     void OnEnable()
+    {
+        Stats.onStatsRefreshed += Redraw;
+        Redraw();
+    }
+
+    void OnDisable() =>
+        Stats.onStatsRefreshed -= Redraw;
+
+    void Redraw()
     {
         var count = Stats.GetLootableCount(_type);
 

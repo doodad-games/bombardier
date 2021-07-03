@@ -27,7 +27,7 @@ public class BombButton : MonoBehaviour, IPointerDownHandler
         var closest = Player.ClosestEmptyTile;
         if (closest == null) { return; }
 
-        var bomb = TileController.SpawnTile(S.TilePlayerBomb, closest.Value)
+        var bomb = TileController.SpawnTile(S.TilePlayerBomb, closest.Value, true)
             as PlayerBomb;
         bomb.Initialise(Player.BombPower);
 

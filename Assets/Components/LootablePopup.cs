@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LootablePopup : MonoBehaviour, IPointerClickHandler
+public class LootablePopup : MonoBehaviour
 {
     #pragma warning disable CS0649
     [SerializeField]
@@ -28,19 +28,6 @@ public class LootablePopup : MonoBehaviour, IPointerClickHandler
         _description.text = S.LootableDescriptions[type];
 
         gameObject.SetActive(true);
-    }
-
-    public void Close()
-    {
-        Sounds.Click.Play();
-        _animator.SetTrigger("Close");
-    }
-
-    public void Disable() => gameObject.SetActive(false);
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (_closeButton.activeSelf) Close();
     }
 
     void Awake() =>

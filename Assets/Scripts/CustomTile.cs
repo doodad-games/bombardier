@@ -22,11 +22,11 @@ public abstract class CustomTile : MonoBehaviour, ICustomTile
 
     protected bool Initialised { get; private set; }
     protected bool IsDropped { get; private set; }
+    protected bool Cleaned { get; private set; }
 
     Action _onDestroy;
 
     int _fireCount;
-    bool _cleaned;
     bool _destroyed;
 
     int _FireCount
@@ -54,6 +54,8 @@ public abstract class CustomTile : MonoBehaviour, ICustomTile
 
     public virtual void Combust()
     {
+        if (Cleaned) { return; }
+
         if (GoneAfterCombust())
         {
             Sounds.Burn();
@@ -66,8 +68,8 @@ public abstract class CustomTile : MonoBehaviour, ICustomTile
     
     protected void CleanUp()
     {
-        if (_cleaned) { return; }
-        _cleaned = true;
+        if (Cleaned) { return; }
+        Cleaned = true;
 
         _onDestroy?.Invoke();
     }

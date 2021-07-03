@@ -39,6 +39,7 @@ public class PlayerExplosion : Explosion
     {
         if (_initialised) { throw new NotSupportedException(); }
 
+        source = Source.PlayerBomb;
         _power = power;
 
         _initialised = true;

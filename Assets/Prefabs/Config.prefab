@@ -110,21 +110,60 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0.075
-      inSlope: -0.000125
-      outSlope: -0.000125
+      inSlope: -0.00013750001
+      outSlope: -0.00013750001
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 200
-      value: 0.05
+      value: 0.0475
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropGoldenTimeChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0015
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dropMineChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 30
+      value: 0
+      inSlope: 0
+      outSlope: 0.00017857143
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 100
+      value: 0.0125
+      inSlope: 0.00017857143
+      outSlope: 0
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -387,6 +426,14 @@ MonoBehaviour:
   _floorNumCopies: {x: 3, y: 3}
   _gameplayUIAnimTime: 1.5
   _mainCameraZoomTime: 3
+  _mineExplodeAfter: 4
+  _mineCombustAt: 0.975
+  _mineDestroyAfter: 0.25
+  _minePlacedDurationMultiplier: 2
+  _minePlacedHasReward: 0
+  _mineExplosionPrefab: {fileID: 7412922891362607423, guid: 2417d67c0511c4f43a4bc383d222689e,
+    type: 3}
+  _mineExplosionReach: 2
   _objectLootedParticle: {fileID: 2850170054097354705, guid: e898d117768f0490eb1d92f8adb8f316,
     type: 3}
   _objectLootedShrinkTime: 0.25
@@ -411,6 +458,30 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _placeMineChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 60
+      value: 0
+      inSlope: 0
+      outSlope: 0.000044642857
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 200
+      value: 0.00625
+      inSlope: 0.000044642857
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -448,6 +519,7 @@ MonoBehaviour:
   _powerupExtraSpeedLimit: 5
   _powerupExtraSpeedDifference: 0.02
   _powerupExtraTimeAmount: 20
+  _powerupGoldenTimeAmount: 50
   _powerupExtraTimeCooldown: 5
   _powerupMultibombLimit: 6
   _powerupMultibombDifference: 0.5
@@ -469,6 +541,10 @@ MonoBehaviour:
   _tileExtraSpeedPrefab: {fileID: 2357691349752004710, guid: f81e55dd63cbd493f98c6501ecf96b9a,
     type: 3}
   _tileExtraTimePrefab: {fileID: 7994087324650429, guid: b829be47bec5f45cfb26564a41b3b91f,
+    type: 3}
+  _tileGoldenTimePrefab: {fileID: 488401923609696290, guid: c312482c186972f4ea82fbc37cabccfc,
+    type: 3}
+  _tileMinePrefab: {fileID: 3295887556113005127, guid: d436fa583e14b4e32a0d06bf86430157,
     type: 3}
   _tileMultibombPrefab: {fileID: 6945556443809891831, guid: 06b61ce4adec749acab30763c3c312b8,
     type: 3}
